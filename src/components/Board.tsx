@@ -112,7 +112,6 @@ export const Board:React.FC = () => {
               value={square}
               onClick={onClick}
               index={index}
-              width={width}
             />
           )
         })}

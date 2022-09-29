@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback } from 'react'
+import React, {useState, useEffect, useCallback, useRef } from 'react'
 import { Square } from './Square';
 
 export const Board:React.FC = () => {
@@ -6,6 +6,13 @@ export const Board:React.FC = () => {
   const [winner, setWinner] = useState<string | null>(''); 
   const [xIsNext, setXisNext] = useState<boolean>();
   const [isVisible, setIsVisible] = useState<boolean>(false);
+
+  const ref = useRef<HTMLDivElement>(null);
+  let width: number;
+
+  if (ref.current) {
+    width = ref.current.offsetWidth;
+  }
 
   useEffect(() => {
     newGame();
@@ -78,7 +85,9 @@ export const Board:React.FC = () => {
         <div className="modal is-active">
           <div className="modal-background"></div>
           <div className='modal-content box'>
-            {(winner === 'X' || winner === 'O') ? <h2>The winner is {winner}!</h2> : <h2>It's a tie game!</h2>}
+            {(winner === 'X' || winner === 'O') 
+            ? <h2>The winner is {winner}!</h2> 
+            : <h2>It's a tie game!</h2>}
           </div>
           <button 
             className="modal-close is-large"
@@ -88,14 +97,21 @@ export const Board:React.FC = () => {
           </button>
         </div>
       }
-      <div className="column">
-        <div className='Board'>
-          {squares.map((square, index) => {
-            return(
-              <Square key={index} value={square} onClick={onClick} index={index}/>
-            )
-          })}
-        </div>
+      <div 
+        ref={ref} 
+        className='Board'
+      >
+        {squares.map((square, index) => {
+          return(
+            <Square 
+              key={index}
+              value={square}
+              onClick={onClick}
+              index={index}
+              width={width}
+            />
+          )
+        })}
       </div>
     </>
   )

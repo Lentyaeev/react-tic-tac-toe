@@ -38,7 +38,7 @@ function App() {
           >
             <img className="restart" src={Restart} alt='restart' />
           </animated.button>
-          <animated.div style={props}>
+          <animated.div style={props} className="column is-half">
             <Board />
           </animated.div>
         </>

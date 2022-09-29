@@ -2,9 +2,10 @@ type Props = {
   value: string,
   onClick: (_:number) => void;
   index: number;
+  width: number | undefined;
 }
 
-export const Square: React.FC<Props> = ({ value, onClick, index }) => {
+export const Square: React.FC<Props> = ({ value, onClick, index, width }) => {
   let className;
   switch(value) {
     case 'O': className = 'is-success'; break;
@@ -14,10 +15,13 @@ export const Square: React.FC<Props> = ({ value, onClick, index }) => {
   }
 
 
-  return(
+  return (
   <button
     className={`Square button is-size-2 ${className}`}
     onClick={() => onClick(index)}
+    style={{
+      width: width ? width / 3 : 0,
+    }}
   >
     {value}
   </button>

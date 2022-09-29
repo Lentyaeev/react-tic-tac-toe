@@ -3,7 +3,7 @@ import { Board } from './components/Board';
 import Restart from './icons8-restart-100.png';
 import 'bulma/css/bulma.min.css';
 import './App.scss';
-import { useSpring, animated, config} from 'react-spring'
+import { useSpring, animated, config } from 'react-spring';
 
 function App() {
   const [isStarted, setIsStarted] = useState(false);
@@ -12,7 +12,7 @@ function App() {
     from: { opacity: 0 },
     reset: true,
     config: config.molasses,
-  })
+  });
 
   return (
     <div className="App columns">

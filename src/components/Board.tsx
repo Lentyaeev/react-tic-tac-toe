@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useCallback, useRef } from 'react'
+import React, {useState, useEffect, useCallback } from 'react'
 import { Square } from './Square';
+import { useSpring, animated, config } from 'react-spring';
 
 export const Board:React.FC = () => {
   const [squares, setSquares] = useState<string[]>([]);
@@ -7,18 +8,17 @@ export const Board:React.FC = () => {
   const [xIsNext, setXisNext] = useState<boolean>();
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const ref = useRef<HTMLDivElement>(null);
-  let width: number;
-
-  if (ref.current) {
-    width = ref.current.offsetWidth;
-  }
+  const props = useSpring({ 
+    to: { opacity: 1 },
+    from: { opacity: 0 },
+    reset: true,
+    config: config.molasses,
+  });
 
   useEffect(() => {
     newGame();
     setIsVisible(false);
   }, []);
-
 
   useEffect(() => {
     if (squares.every(sq => sq !== null || '') && squares.length !== 0) {
@@ -86,7 +86,10 @@ export const Board:React.FC = () => {
   return (
     <>
       {isVisible &&
-        <div className="modal is-active">
+        <animated.div
+          style={props}
+          className="modal is-active"
+        >
           <div className="modal-background"></div>
           <div className='modal-content box'>
             {(winner === 'X' || winner === 'O') 
@@ -99,10 +102,9 @@ export const Board:React.FC = () => {
             onClick={() => setIsVisible(false)}
           >
           </button>
-        </div>
+        </animated.div>
       }
       <div 
-        ref={ref} 
         className='Board'
       >
         {squares.map((square, index) => {

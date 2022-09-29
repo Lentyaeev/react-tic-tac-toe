@@ -7,7 +7,6 @@ import { useSpring, animated, config} from 'react-spring'
 
 function App() {
   const [isStarted, setIsStarted] = useState(false);
-  const [finished, setFinished] = useState(false);
   const props = useSpring({ 
     to: { opacity: 1 },
     from: { opacity: 0 },
@@ -23,7 +22,6 @@ function App() {
             className="button is-danger is-large"
             onClick={() => {
               setIsStarted((prev) => !prev);
-              setFinished(false);
             }}
           >
             Start new game!
@@ -35,15 +33,13 @@ function App() {
           <animated.button style={props}
             className="column is-one-third button-res"
             onClick={() => {
-              console.log(finished);
               setIsStarted((prev) => !prev);
-              setFinished(false);
             }}
           >
             <img className="restart" src={Restart} alt='restart' />
           </animated.button>
           <animated.div style={props}>
-            <Board setFinished={setFinished} />
+            <Board />
           </animated.div>
         </>
       }

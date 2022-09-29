@@ -1,11 +1,7 @@
 import React, {useState, useEffect, useCallback } from 'react'
 import { Square } from './Square';
 
-type Props = {
-  setFinished: (_:boolean) => void;
-}
-
-export const Board:React.FC<Props> = ({ setFinished }) => {
+export const Board:React.FC = () => {
   const [squares, setSquares] = useState<string[]>([]);
   const [winner, setWinner] = useState<string | null>(''); 
   const [xIsNext, setXisNext] = useState<boolean>();
@@ -13,7 +9,6 @@ export const Board:React.FC<Props> = ({ setFinished }) => {
 
   useEffect(() => {
     newGame();
-    setFinished(false);
     setIsVisible(false);
   }, []);
 
@@ -29,7 +24,6 @@ export const Board:React.FC<Props> = ({ setFinished }) => {
   useEffect(() => {
     if(winner) {
       setIsVisible(true);
-      setFinished(true);
     }
   }, [winner]);
 

@@ -22,9 +22,13 @@ export const Board:React.FC = () => {
 
   useEffect(() => {
     if (squares.every(sq => sq !== null || '') && squares.length !== 0) {
-      setWinner('no one');
+      if (!calculateWinner()) {
+        setWinner('no one');
+      } else {
+        setWinner(calculateWinner());
+      }
     } else {
-      setWinner(calculateWiner());
+      setWinner(calculateWinner());
     }
   }, [squares])
 
@@ -53,7 +57,7 @@ export const Board:React.FC = () => {
     }
   }, [player, squares]);
 
-  const calculateWiner = () => {
+  const calculateWinner = () => {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],

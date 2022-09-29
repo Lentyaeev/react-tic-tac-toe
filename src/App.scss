@@ -1,0 +1,52 @@
+body {
+  padding: 2%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html {
+  background-color: rgb(42, 39, 39);
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.Board {
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  grid-gap: 5px;
+}
+
+.Square {
+  height: 200px;
+  transition: all 0.3s;
+}
+
+.button {
+  &-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-res {
+    background: none;
+    outline: none;
+    border: none;
+    transition: all 0.3s;
+    &:hover {
+      scale: 1.1;
+    }
+    &:active {
+      scale: 0.9;
+    }
+  }
+}
+
+.restart {
+  filter: invert(100%);
+}
